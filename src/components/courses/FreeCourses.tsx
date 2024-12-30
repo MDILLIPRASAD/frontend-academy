@@ -3,9 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Code2, Terminal, Palette } from "lucide-react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const freeCourses = [
   {
+    id: "web-dev-basics",
     title: "Web Development Basics",
     description: "Introduction to HTML, CSS, and JavaScript fundamentals",
     skills: ["HTML", "CSS", "Basic JavaScript"],
@@ -13,6 +15,7 @@ const freeCourses = [
     duration: "2 hours",
   },
   {
+    id: "git-essentials",
     title: "Git Essentials",
     description: "Learn version control basics with Git",
     skills: ["Git", "GitHub", "Version Control"],
@@ -20,6 +23,7 @@ const freeCourses = [
     duration: "1.5 hours",
   },
   {
+    id: "ui-design",
     title: "UI Design Principles",
     description: "Basic principles of user interface design",
     skills: ["Design Theory", "Color Theory", "Typography"],
@@ -29,16 +33,19 @@ const freeCourses = [
 ];
 
 export const FreeCourses = () => {
-  const handleEnroll = (courseTitle: string) => {
+  const navigate = useNavigate();
+
+  const handleEnroll = (courseId: string, courseTitle: string) => {
     toast.success(`Successfully enrolled in ${courseTitle}! Check your email for next steps.`);
+    navigate(`/course/${courseId}`);
   };
 
   return (
-    <div>
+    <div id="free-courses">
       <h2 className="text-2xl font-semibold mb-6">Free Courses</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {freeCourses.map((course, index) => (
-          <Card key={index} className="hover:shadow-lg transition-shadow">
+        {freeCourses.map((course) => (
+          <Card key={course.id} className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/course/${course.id}`)}>
             <CardHeader>
               <div className="flex items-center justify-center mb-4">
                 {course.icon}
@@ -66,7 +73,10 @@ export const FreeCourses = () => {
             </CardContent>
             <CardFooter className="flex justify-center">
               <Button 
-                onClick={() => handleEnroll(course.title)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEnroll(course.id, course.title);
+                }}
                 variant="outline"
                 className="w-full"
               >

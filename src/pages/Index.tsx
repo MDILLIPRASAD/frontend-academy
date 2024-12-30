@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code2, Browser, Layout, Palette } from "lucide-react";
+import { Code2, Globe, Layout, Palette } from "lucide-react";
 
 const Index = () => {
   const courses = [
@@ -14,7 +14,7 @@ const Index = () => {
       title: "React Development",
       description: "Building scalable applications with React and its ecosystem",
       skills: ["React", "Redux", "React Query", "Next.js"],
-      icon: <Browser className="w-8 h-8 text-green-500" />,
+      icon: <Globe className="w-8 h-8 text-green-500" />,
     },
     {
       title: "UI/UX Development",

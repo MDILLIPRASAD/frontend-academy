@@ -4,8 +4,24 @@ import { PortfolioSection } from "@/components/portfolio/PortfolioSection";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, BookOpen, Users, Target, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useLocation } from "react-router-dom";
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if there's a section to scroll to from navigation
+    if (location.state?.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.scrollBy(0, -80); // Offset for header
+      }
+    }
+  }, [location]);
+
+  // ... keep existing code (hero section and other content)
+
   return (
     <div className="min-h-screen bg-background">
       <Header />

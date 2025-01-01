@@ -1,18 +1,38 @@
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { Search, User } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { toast } from "sonner";
 
 export const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToSection = (sectionId: string) => {
+    // If we're not on the home page, navigate there first
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionId } });
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
       // Add some offset for the sticky header
       window.scrollBy(0, -80);
     }
+  };
+
+  const handleSignIn = () => {
+    toast.info("Sign in functionality coming soon!");
+  };
+
+  const handleSearch = () => {
+    toast.info("Search functionality coming soon!");
+  };
+
+  const handleUserProfile = () => {
+    toast.info("User profile functionality coming soon!");
   };
 
   return (
@@ -30,34 +50,34 @@ export const Header = () => {
                 <NavigationMenuContent>
                   <div className="grid gap-3 p-6 w-[400px]">
                     <div className="grid grid-cols-2 gap-3">
-                      <div 
+                      <button 
                         onClick={() => scrollToSection("free-courses")} 
-                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer"
+                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer text-left"
                       >
                         <div className="font-medium mb-1">Free Courses</div>
                         <p className="text-sm text-muted-foreground">Start learning today</p>
-                      </div>
-                      <div 
+                      </button>
+                      <button 
                         onClick={() => scrollToSection("individual-courses")} 
-                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer"
+                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer text-left"
                       >
                         <div className="font-medium mb-1">Individual Courses</div>
                         <p className="text-sm text-muted-foreground">Learn at your own pace</p>
-                      </div>
-                      <div 
+                      </button>
+                      <button 
                         onClick={() => scrollToSection("course-bundles")} 
-                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer"
+                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer text-left"
                       >
                         <div className="font-medium mb-1">Course Bundles</div>
                         <p className="text-sm text-muted-foreground">Save with our bundles</p>
-                      </div>
-                      <div 
+                      </button>
+                      <button 
                         onClick={() => scrollToSection("portfolio")} 
-                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer"
+                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer text-left"
                       >
                         <div className="font-medium mb-1">Our Impact</div>
                         <p className="text-sm text-muted-foreground">See our achievements</p>
-                      </div>
+                      </button>
                     </div>
                   </div>
                 </NavigationMenuContent>
@@ -72,46 +92,44 @@ export const Header = () => {
                       <p className="text-sm text-muted-foreground">Custom training for teams</p>
                     </div>
                     <div className="grid gap-2">
-                      <div 
+                      <button 
                         onClick={() => scrollToSection("team-training")} 
-                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer"
+                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer text-left w-full"
                       >
                         <div className="font-medium mb-1">Team Training</div>
                         <p className="text-sm text-muted-foreground">Upskill your entire team</p>
-                      </div>
-                      <div 
+                      </button>
+                      <button 
                         onClick={() => scrollToSection("custom-programs")} 
-                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer"
+                        className="block p-3 hover:bg-accent rounded-lg cursor-pointer text-left w-full"
                       >
                         <div className="font-medium mb-1">Custom Programs</div>
                         <p className="text-sm text-muted-foreground">Tailored to your needs</p>
-                      </div>
+                      </button>
                     </div>
                   </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <div
+                <button
                   onClick={() => scrollToSection("portfolio")}
-                  className="cursor-pointer"
+                  className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
                 >
-                  <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                    Portfolio
-                  </NavigationMenuLink>
-                </div>
+                  Portfolio
+                </button>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" onClick={handleSearch}>
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" onClick={handleUserProfile}>
               <User className="h-5 w-5" />
             </Button>
-            <Button>Sign In</Button>
+            <Button onClick={handleSignIn}>Sign In</Button>
           </div>
         </div>
       </div>

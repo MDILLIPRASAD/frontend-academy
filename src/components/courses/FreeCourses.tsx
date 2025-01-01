@@ -35,8 +35,13 @@ const freeCourses = [
 export const FreeCourses = () => {
   const navigate = useNavigate();
 
-  const handleEnroll = (courseId: string, courseTitle: string) => {
+  const handleEnroll = (e: React.MouseEvent, courseId: string, courseTitle: string) => {
+    e.stopPropagation(); // Prevent card click event
     toast.success(`Successfully enrolled in ${courseTitle}! Check your email for next steps.`);
+    navigate(`/course/${courseId}`);
+  };
+
+  const handleCardClick = (courseId: string) => {
     navigate(`/course/${courseId}`);
   };
 
@@ -45,7 +50,11 @@ export const FreeCourses = () => {
       <h2 className="text-2xl font-semibold mb-6">Free Courses</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {freeCourses.map((course) => (
-          <Card key={course.id} className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/course/${course.id}`)}>
+          <Card 
+            key={course.id} 
+            className="hover:shadow-lg transition-shadow cursor-pointer" 
+            onClick={() => handleCardClick(course.id)}
+          >
             <CardHeader>
               <div className="flex items-center justify-center mb-4">
                 {course.icon}
@@ -73,10 +82,7 @@ export const FreeCourses = () => {
             </CardContent>
             <CardFooter className="flex justify-center">
               <Button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleEnroll(course.id, course.title);
-                }}
+                onClick={(e) => handleEnroll(e, course.id, course.title)}
                 variant="outline"
                 className="w-full"
               >

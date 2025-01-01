@@ -4,30 +4,22 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Book, Users, Trophy } from "lucide-react";
 import { toast } from "sonner";
+import { courseDetailsData, isCourseId } from "@/components/courses/CourseDetails";
 
 const CourseDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // This would typically come from an API, using static data for demo
-  const courseDetails = {
-    title: "Web Development Basics",
-    description: "Introduction to HTML, CSS, and JavaScript fundamentals",
-    longDescription: "This comprehensive course covers everything you need to know about web development basics. From HTML structure to CSS styling and JavaScript interactivity, you'll learn the core concepts that power modern websites.",
-    skills: ["HTML", "CSS", "Basic JavaScript"],
-    duration: "2 hours",
-    lessons: 12,
-    students: 1500,
-    price: "$99",
-    curriculum: [
-      "Introduction to Web Development",
-      "HTML Fundamentals",
-      "CSS Styling Basics",
-      "JavaScript Essentials",
-      "Responsive Design",
-      "Basic DOM Manipulation",
-    ]
-  };
+  if (!id || !isCourseId(id)) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1>Course not found</h1>
+        <Button onClick={() => navigate('/')}>Return to Home</Button>
+      </div>
+    );
+  }
+
+  const courseDetails = courseDetailsData[id];
 
   const handleEnroll = () => {
     toast.success(`Successfully enrolled in ${courseDetails.title}! Check your email for next steps.`);
@@ -67,6 +59,15 @@ const CourseDetails = () => {
           <div>
             <h3 className="text-xl font-semibold mb-3">Course Overview</h3>
             <p className="text-muted-foreground">{courseDetails.longDescription}</p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold mb-3">Prerequisites</h3>
+            <ul className="list-disc pl-5 space-y-1">
+              {courseDetails.prerequisites.map((prereq, index) => (
+                <li key={index} className="text-muted-foreground">{prereq}</li>
+              ))}
+            </ul>
           </div>
 
           <div>

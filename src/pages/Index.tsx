@@ -1,22 +1,15 @@
 import { Header } from "@/components/layout/Header";
 import { FreeCourses } from "@/components/courses/FreeCourses";
+import { PortfolioSection } from "@/components/portfolio/PortfolioSection";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Code2, Globe, Layout, Palette, Rocket, Brain, Terminal, GraduationCap, Users, Calendar, Building } from "lucide-react";
+import { Code2, Globe, Layout, Palette, Rocket, Brain, Terminal } from "lucide-react";
 import { toast } from "sonner";
 
 const Index = () => {
   const handlePurchase = (courseTitle: string, price: string) => {
     toast.success(`Thank you for your interest in ${courseTitle}! This is a demo purchase for ${price}`);
-  };
-
-  const handleEnroll = (courseTitle: string) => {
-    toast.success(`Successfully enrolled in ${courseTitle}! Check your email for next steps.`);
-  };
-
-  const handleRegister = (eventTitle: string) => {
-    toast.success(`Successfully registered for ${eventTitle}! Check your email for the confirmation.`);
   };
 
   const individualCourses = [
@@ -80,62 +73,6 @@ const Index = () => {
     },
   ];
 
-  const careerTracks = [
-    {
-      title: "Frontend Engineer Track",
-      description: "Complete path to becoming a professional frontend engineer",
-      duration: "6 months",
-      icon: <GraduationCap className="w-8 h-8 text-purple-600" />,
-      includes: ["All Frontend Courses", "React Specialist Track", "Career Mentorship"],
-      price: "$999",
-      originalPrice: "$1,299",
-      savings: "23% off",
-    },
-    {
-      title: "UI/UX Designer Track",
-      description: "Comprehensive journey to becoming a UI/UX designer",
-      duration: "5 months",
-      icon: <Palette className="w-8 h-8 text-pink-600" />,
-      includes: ["UI/UX Courses", "Design Systems", "Portfolio Building"],
-      price: "$899",
-      originalPrice: "$1,199",
-      savings: "25% off",
-    },
-  ];
-
-  const upcomingWorkshops = [
-    {
-      title: "Advanced React Patterns",
-      date: "March 15, 2024",
-      time: "10:00 AM - 2:00 PM EST",
-      instructor: "Sarah Johnson",
-      price: "$149",
-      icon: <Calendar className="w-8 h-8 text-indigo-500" />,
-      spots: "15 spots left",
-    },
-    {
-      title: "Building Design Systems",
-      date: "March 20, 2024",
-      time: "1:00 PM - 5:00 PM EST",
-      instructor: "Michael Chen",
-      price: "$129",
-      icon: <Layout className="w-8 h-8 text-green-500" />,
-      spots: "8 spots left",
-    },
-  ];
-
-  const enterpriseOptions = {
-    title: "Enterprise Training Solutions",
-    description: "Customized training programs for your team",
-    features: [
-      "Custom curriculum development",
-      "Private group sessions",
-      "Progress tracking",
-      "Certification program",
-    ],
-    icon: <Building className="w-8 h-8 text-slate-700" />,
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -148,10 +85,11 @@ const Index = () => {
             </p>
           </div>
 
+          <PortfolioSection />
           <FreeCourses />
 
           {/* Individual Courses Section */}
-          <div>
+          <div id="individual-courses">
             <h2 className="text-2xl font-semibold mb-6">Individual Courses</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {individualCourses.map((course, index) => (
@@ -195,7 +133,7 @@ const Index = () => {
           </div>
 
           {/* Course Bundles Section */}
-          <div>
+          <div id="course-bundles">
             <h2 className="text-2xl font-semibold mb-6">Course Bundles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {bundleCourses.map((bundle, index) => (
@@ -242,136 +180,6 @@ const Index = () => {
                 </Card>
               ))}
             </div>
-          </div>
-
-          {/* Career Tracks Section */}
-          <div>
-            <h2 className="text-2xl font-semibold mb-6">Career Tracks</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {careerTracks.map((track, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow border-2 border-purple-500">
-                  <CardHeader>
-                    <div className="flex items-center justify-center mb-4">
-                      {track.icon}
-                    </div>
-                    <CardTitle className="text-xl text-center">{track.title}</CardTitle>
-                    <CardDescription className="text-center">
-                      {track.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2 justify-center mb-4">
-                      {track.includes.map((item, itemIndex) => (
-                        <Badge
-                          key={itemIndex}
-                          variant="secondary"
-                          className="text-sm"
-                        >
-                          {item}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="text-center space-y-2">
-                      <p className="text-2xl font-bold text-primary">
-                        {track.price}
-                      </p>
-                      <p className="text-sm text-muted-foreground line-through">
-                        {track.originalPrice}
-                      </p>
-                      <Badge variant="destructive">{track.savings}</Badge>
-                      <p className="text-sm text-muted-foreground">
-                        Duration: {track.duration}
-                      </p>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-center">
-                    <Button 
-                      onClick={() => handlePurchase(track.title, track.price)}
-                      className="w-full"
-                      variant="secondary"
-                    >
-                      Start Career Track
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Upcoming Workshops & Events Section */}
-          <div>
-            <h2 className="text-2xl font-semibold mb-6">Upcoming Workshops & Events</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {upcomingWorkshops.map((workshop, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-center justify-center mb-4">
-                      {workshop.icon}
-                    </div>
-                    <CardTitle className="text-xl text-center">{workshop.title}</CardTitle>
-                    <CardDescription className="text-center">
-                      With {workshop.instructor}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2 text-center">
-                      <p className="text-muted-foreground">{workshop.date}</p>
-                      <p className="text-muted-foreground">{workshop.time}</p>
-                      <Badge variant="outline" className="mt-2">
-                        {workshop.spots}
-                      </Badge>
-                      <p className="text-2xl font-bold text-primary mt-4">
-                        {workshop.price}
-                      </p>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-center">
-                    <Button 
-                      onClick={() => handleRegister(workshop.title)}
-                      variant="outline"
-                      className="w-full"
-                    >
-                      Register Now
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Enterprise Section */}
-          <div>
-            <Card className="hover:shadow-lg transition-shadow border-2 border-slate-200">
-              <CardHeader>
-                <div className="flex items-center justify-center mb-4">
-                  {enterpriseOptions.icon}
-                </div>
-                <CardTitle className="text-2xl text-center">{enterpriseOptions.title}</CardTitle>
-                <CardDescription className="text-center">
-                  {enterpriseOptions.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-4">
-                  {enterpriseOptions.features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <Badge variant="secondary" className="text-sm">
-                        {feature}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-center">
-                <Button 
-                  onClick={() => toast.success("Thank you for your interest! Our team will contact you shortly.")}
-                  variant="default"
-                  className="w-full"
-                >
-                  Contact Sales
-                </Button>
-              </CardFooter>
-            </Card>
           </div>
         </div>
       </div>

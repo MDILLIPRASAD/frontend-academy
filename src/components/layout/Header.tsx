@@ -9,7 +9,9 @@ export const Header = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Add some offset for the sticky header
+      window.scrollBy(0, -80);
     }
   };
 
@@ -50,11 +52,11 @@ export const Header = () => {
                         <p className="text-sm text-muted-foreground">Save with our bundles</p>
                       </div>
                       <div 
-                        onClick={() => scrollToSection("career-tracks")} 
+                        onClick={() => scrollToSection("portfolio")} 
                         className="block p-3 hover:bg-accent rounded-lg cursor-pointer"
                       >
-                        <div className="font-medium mb-1">Career Tracks</div>
-                        <p className="text-sm text-muted-foreground">Structured learning paths</p>
+                        <div className="font-medium mb-1">Our Impact</div>
+                        <p className="text-sm text-muted-foreground">See our achievements</p>
                       </div>
                     </div>
                   </div>
@@ -91,11 +93,11 @@ export const Header = () => {
 
               <NavigationMenuItem>
                 <div
-                  onClick={() => scrollToSection("events")}
+                  onClick={() => scrollToSection("portfolio")}
                   className="cursor-pointer"
                 >
                   <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                    Events
+                    Portfolio
                   </NavigationMenuLink>
                 </div>
               </NavigationMenuItem>

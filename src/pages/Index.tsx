@@ -1,188 +1,127 @@
 import { Header } from "@/components/layout/Header";
 import { FreeCourses } from "@/components/courses/FreeCourses";
 import { PortfolioSection } from "@/components/portfolio/PortfolioSection";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Code2, Globe, Layout, Palette, Rocket, Brain, Terminal } from "lucide-react";
-import { toast } from "sonner";
+import { ArrowRight, Sparkles, BookOpen, Users, Target } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Index = () => {
-  const handlePurchase = (courseTitle: string, price: string) => {
-    toast.success(`Thank you for your interest in ${courseTitle}! This is a demo purchase for ${price}`);
-  };
-
-  const individualCourses = [
-    {
-      title: "Frontend Fundamentals",
-      description: "Mastery in HTML5, CSS3, and Modern JavaScript",
-      skills: ["HTML5", "CSS3", "JavaScript ES6+"],
-      icon: <Code2 className="w-8 h-8 text-blue-500" />,
-      price: "$99",
-    },
-    {
-      title: "React Development",
-      description: "Building scalable applications with React and its ecosystem",
-      skills: ["React", "Redux", "React Query", "Next.js"],
-      icon: <Globe className="w-8 h-8 text-green-500" />,
-      price: "$149",
-    },
-    {
-      title: "UI/UX Development",
-      description: "Creating responsive and accessible user interfaces",
-      skills: ["Responsive Design", "Accessibility", "UI Components"],
-      icon: <Layout className="w-8 h-8 text-purple-500" />,
-      price: "$129",
-    },
-    {
-      title: "Modern Frontend Tools",
-      description: "Experience with modern development tools and frameworks",
-      skills: ["TypeScript", "Tailwind CSS", "Version Control"],
-      icon: <Palette className="w-8 h-8 text-orange-500" />,
-      price: "$119",
-    },
-  ];
-
-  const bundleCourses = [
-    {
-      title: "Frontend Master Bundle",
-      description: "Complete frontend development journey from basics to advanced",
-      skills: ["All Individual Courses", "Project Portfolio", "Career Guidance"],
-      icon: <Rocket className="w-8 h-8 text-red-500" />,
-      price: "$399",
-      originalPrice: "$496",
-      savings: "20% off",
-    },
-    {
-      title: "React Specialist Track",
-      description: "Become a React expert with our specialized bundle",
-      skills: ["React Fundamentals", "Advanced Patterns", "Performance Optimization"],
-      icon: <Brain className="w-8 h-8 text-indigo-500" />,
-      price: "$249",
-      originalPrice: "$299",
-      savings: "17% off",
-    },
-    {
-      title: "Full Stack Bundle",
-      description: "Master both frontend and backend development",
-      skills: ["Frontend Complete", "Node.js", "Database Design"],
-      icon: <Terminal className="w-8 h-8 text-teal-500" />,
-      price: "$599",
-      originalPrice: "$749",
-      savings: "20% off",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="container mx-auto px-4 py-16">
-        <div className="space-y-12">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold tracking-tight">Frontend Developer Academy</h1>
+      
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-32 pb-16">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center space-y-6 max-w-3xl mx-auto"
+          >
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+              Master Frontend Development
+            </h1>
             <p className="text-xl text-muted-foreground">
-              Comprehensive learning paths for modern web development
+              Join thousands of developers learning to build modern web applications with our comprehensive courses
             </p>
-          </div>
-
-          <PortfolioSection />
-          <FreeCourses />
-
-          {/* Individual Courses Section */}
-          <div id="individual-courses">
-            <h2 className="text-2xl font-semibold mb-6">Individual Courses</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {individualCourses.map((course, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-center justify-center mb-4">
-                      {course.icon}
-                    </div>
-                    <CardTitle className="text-xl text-center">{course.title}</CardTitle>
-                    <CardDescription className="text-center">
-                      {course.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2 justify-center mb-4">
-                      {course.skills.map((skill, skillIndex) => (
-                        <Badge
-                          key={skillIndex}
-                          variant="secondary"
-                          className="text-sm"
-                        >
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                    <p className="text-2xl font-bold text-center text-primary">
-                      {course.price}
-                    </p>
-                  </CardContent>
-                  <CardFooter className="flex justify-center">
-                    <Button 
-                      onClick={() => handlePurchase(course.title, course.price)}
-                      className="w-full"
-                    >
-                      Purchase Course
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
+            <div className="flex gap-4 justify-center">
+              <Button size="lg" className="group">
+                Get Started 
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button size="lg" variant="outline">
+                View Courses
+              </Button>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Course Bundles Section */}
-          <div id="course-bundles">
-            <h2 className="text-2xl font-semibold mb-6">Course Bundles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {bundleCourses.map((bundle, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow border-2 border-primary">
-                  <CardHeader>
-                    <div className="flex items-center justify-center mb-4">
-                      {bundle.icon}
-                    </div>
-                    <CardTitle className="text-xl text-center">{bundle.title}</CardTitle>
-                    <CardDescription className="text-center">
-                      {bundle.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2 justify-center mb-4">
-                      {bundle.skills.map((skill, skillIndex) => (
-                        <Badge
-                          key={skillIndex}
-                          variant="secondary"
-                          className="text-sm"
-                        >
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="text-center space-y-2">
-                      <p className="text-2xl font-bold text-primary">
-                        {bundle.price}
-                      </p>
-                      <p className="text-sm text-muted-foreground line-through">
-                        {bundle.originalPrice}
-                      </p>
-                      <Badge variant="destructive">{bundle.savings}</Badge>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-center">
-                    <Button 
-                      onClick={() => handlePurchase(bundle.title, bundle.price)}
-                      className="w-full"
-                    >
-                      Purchase Bundle
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
+          {/* Features Grid */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20"
+          >
+            <div className="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+              <Sparkles className="h-12 w-12 text-purple-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Interactive Learning</h3>
+              <p className="text-muted-foreground">Learn by doing with hands-on projects and real-world examples</p>
+            </div>
+            <div className="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+              <BookOpen className="h-12 w-12 text-blue-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Comprehensive Curriculum</h3>
+              <p className="text-muted-foreground">From basics to advanced concepts, everything you need to succeed</p>
+            </div>
+            <div className="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+              <Target className="h-12 w-12 text-green-500 mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Career-Focused</h3>
+              <p className="text-muted-foreground">Build a portfolio that gets you hired in top tech companies</p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Background Decoration */}
+        <div className="absolute -top-1/2 left-0 -z-10 w-full h-full bg-gradient-to-b from-purple-50 to-white opacity-50 blur-3xl" />
+      </section>
+
+      {/* Testimonial Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="py-16 bg-primary/5"
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-6">What Our Students Say</h2>
+            <blockquote className="text-xl italic text-muted-foreground">
+              "The courses here transformed my career. I went from knowing nothing about web development to landing my dream job in just 6 months!"
+            </blockquote>
+            <div className="mt-4">
+              <p className="font-semibold">Sarah Johnson</p>
+              <p className="text-sm text-muted-foreground">Frontend Developer at Tech Corp</p>
             </div>
           </div>
         </div>
-      </div>
+      </motion.section>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <PortfolioSection />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <FreeCourses />
+      </motion.div>
+
+      {/* Call to Action Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="py-16 bg-primary text-primary-foreground"
+      >
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Journey?</h2>
+          <p className="text-xl mb-8 opacity-90">Join thousands of successful developers who transformed their careers with us</p>
+          <Button size="lg" variant="secondary" className="group">
+            Enroll Now
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </div>
+      </motion.section>
     </div>
   );
 };

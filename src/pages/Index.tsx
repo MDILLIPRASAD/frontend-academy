@@ -4,7 +4,8 @@ import { PortfolioSection } from "@/components/portfolio/PortfolioSection";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, BookOpen, Users, Target, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Index = () => {
   const location = useLocation();

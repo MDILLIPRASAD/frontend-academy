@@ -21,8 +21,6 @@ const Index = () => {
     }
   }, [location]);
 
-  // ... keep existing code (hero section and other content)
-
   return (
     <div className="min-h-screen bg-background">
       <Header />

@@ -1,12 +1,3 @@
-
-# Modern Web Development Learning Platform
-
-![Project Banner](public/og-image.png)
-
-## Overview
-
-This interactive web platform helps aspiring developers master modern web development skills through comprehensive courses, hands-on projects, and community engagement. The site features a clean, responsive design with engaging animations and a user-friendly interface.
-
 ## What technologies are used for this project?
 
 This project is built with:
